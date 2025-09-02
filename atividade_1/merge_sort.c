@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 void merge(int vetor[], int inicio, int meio, int fim) {
     int com1 = inicio, com2 = meio + 1, comAux = 0, tam = fim - inicio + 1;
@@ -47,31 +48,52 @@ void merge_sort(int vetor[], int inicio, int fim) {
 }
 
 int main() {
+    int tamanho = 100000;
 
-    int vetor;
+    clock_t inicio, fim;
 
-    printf("Digite o tamanho do vetor: ");
-    scanf("%d", &vetor);
+    // int vetor;
 
-    int *vetorMalloc = (int *)malloc(vetor * sizeof(int));
+    // printf("Digite o tamanho do vetor: ");
+    // scanf("%d", &vetor);
 
-    for(int i = 0; i < vetor; i++) {
-        printf("Digite um numero para a posicao %d: ", i + 1);
-        scanf("%d", &vetorMalloc[i]);
+    // int *vetorMalloc = (int *)malloc(vetor * sizeof(int));
+
+    // for(int i = 0; i < vetor; i++) {
+    //     printf("Digite um numero para a posicao %d: ", i + 1);
+    //     scanf("%d", &vetorMalloc[i]);
+    // }
+
+    int *vetor = (int *)malloc(tamanho * sizeof(int));
+    if (vetor == NULL) {
+        printf("Erro ao alocar memoria.\n");
+        return 1;
     }
 
-    for(int i = 0; i < vetor; i++) {
-        printf("[%d] ", vetorMalloc[i]);
+    srand(time(NULL));
+
+    for (int i = 0; i < tamanho; i++) {
+        vetor[i] = rand() % 1000000;
+    }
+
+    for(int i = 0; i < tamanho; i++) {
+        printf("[%d] ", vetor[i]);
     }
 
     printf("\n");
-    merge_sort(vetorMalloc, 0, vetor - 1);
+    inicio = clock();
 
-    for(int i = 0; i < vetor; i++) {
-        printf("[%d] ", vetorMalloc[i]);
+    merge_sort(vetor, 0, tamanho - 1);
+
+    fim = clock();
+
+    for(int i = 0; i < tamanho; i++) {
+        printf("[%d] ", vetor[i]);
     }
 
-    free(vetorMalloc);
+    double tempo = (double)(fim - inicio) / CLOCKS_PER_SEC;
+    printf("\nTempo de execução: %.9f segundos\n", tempo);
 
+    free(vetor);
     return 0;
 }
