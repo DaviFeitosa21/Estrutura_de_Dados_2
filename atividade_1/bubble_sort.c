@@ -22,7 +22,7 @@ void imprimir_vetor(int vetor[], int tamanho) {
 }
 
 int main() {
-    int tamanho = 100000;
+    int tamanho = 50000;
     
     clock_t inicio, fim;
 
@@ -63,7 +63,7 @@ int main() {
     imprimir_vetor(vetor, tamanho);
 
     double tempo = (double)(fim - inicio) / CLOCKS_PER_SEC;
-    printf("\nTempo de execução: %.9f segundos\n", tempo);
+    printf("\nTempo de execução: %.3f segundos\n", tempo);
 
     free(vetor);
     return 0;

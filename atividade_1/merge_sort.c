@@ -92,7 +92,7 @@ int main() {
     }
 
     double tempo = (double)(fim - inicio) / CLOCKS_PER_SEC;
-    printf("\nTempo de execução: %.9f segundos\n", tempo);
+    printf("\nTempo de execução: %.3f segundos\n", tempo);
 
     free(vetor);
     return 0;
