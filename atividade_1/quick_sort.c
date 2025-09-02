@@ -24,7 +24,7 @@ int particionar(int *vetor, int inicio, int fim) {
     }
 }
 
-void quickSort(int *vetor, int inicio, int fim) {
+void quick_sort(int *vetor, int inicio, int fim) {
     if(inicio < fim) {
         int indicePivo = particionar(vetor, inicio, fim);
         quickSort(vetor, inicio, indicePivo - 1);
