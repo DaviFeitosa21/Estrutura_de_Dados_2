@@ -22,14 +22,14 @@ int busca_padrao(const char *texto, const char *padrao) {
 
 int main() {
     const char *texto = "teste de busca";
-    const char *padrao = "busca";
+    const char *padrao = "de";
     int pos = busca_padrao(texto, padrao);
 
     if (pos > 0) {
-        printf("padrao encontrado na posicao: %d", pos);
+        printf("padrão encontrado na posicão: %d", pos);
     }
     else {
-        printf("padrao nao encontrado");
+        printf("padrão não encontrado");
     }
     
 }
