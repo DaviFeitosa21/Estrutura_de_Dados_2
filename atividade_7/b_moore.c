@@ -18,6 +18,7 @@ void pre_processamento(const char *padrao, int m, int tabela[]) {
 int busca_boyer(const char *texto, const char *padrao) {
     int n = strlen(texto);
     int m = strlen(padrao);
+    int contador = 0;
     int tabela_pre_processamento[TAM_ALFABETO];
 
     pre_processamento(padrao, m, tabela_pre_processamento);
@@ -32,7 +33,11 @@ int busca_boyer(const char *texto, const char *padrao) {
         }
 
         if(j < 0) {
-            return deslocamento;
+            printf("padrão encontrado na posição: %d\n", deslocamento);
+            contador++;
+
+            //avança o deslocamento e continua a busca(evita loop)
+            deslocamento += (deslocamento + m < n) ? m - tabela_pre_processamento[(unsigned char)texto[deslocamento + m]] : 1;
         }
         else {
             int ultimo = tabela_pre_processamento[(unsigned char)texto[deslocamento + j]];
@@ -46,17 +51,17 @@ int busca_boyer(const char *texto, const char *padrao) {
         }
     }
 
-    return -1;
+    return contador;
 }
 
 int main() {
     const char *texto = "algoritmo de busca boyer moore";
-    const char *padrao = "moore";
+    const char *padrao = "e";
 
-    int pos = busca_boyer(texto, padrao);
+    int total = busca_boyer(texto, padrao);
 
-    if(pos >= 0) {
-        printf("padrão encontrado na posição: %d\n", pos);
+    if(total >= 0) {
+        printf("padrões encontrados: %d\n", total);
     }
     else {
         printf("padrao não encontrado");

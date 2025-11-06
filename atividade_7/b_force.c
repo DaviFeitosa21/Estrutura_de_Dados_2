@@ -5,6 +5,7 @@
 int busca_padrao(const char *texto, const char *padrao) {
     int n = strlen(texto);
     int m = strlen(padrao);
+    int contador = 0;
 
     for (int i = 0; i <= n - m; i++) {
         int j;
@@ -14,22 +15,24 @@ int busca_padrao(const char *texto, const char *padrao) {
             }
         }
         if(j == m) {
-            return i;
+            printf("padrão encontrado na posicão: %d\n", i);
+            contador++;
         }
     }
-    return -1;
+    return contador;
 }
 
 int main() {
-    const char *texto = "teste de busca";
+    const char *texto = "teste de busca de";
     const char *padrao = "de";
-    int pos = busca_padrao(texto, padrao);
 
-    if (pos > 0) {
-        printf("padrão encontrado na posicão: %d", pos);
+    int total = busca_padrao(texto, padrao);
+
+    if (total > 0) {
+        printf("padrões encontrados: %d", total);
     }
     else {
-        printf("padrão não encontrado");
+        printf("padrão não encontrado\n");
     }
     
 }

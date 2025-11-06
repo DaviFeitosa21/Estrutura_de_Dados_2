@@ -51,7 +51,7 @@ int main() {
     printf("Conteudo do arquivo:\n%s\n\n", texto);
 
     const char *padrao = "teste";
-    int pos =busca_padrao(texto, padrao);
+    int pos = busca_padrao(texto, padrao);
 
     if (pos > 0) {
         printf("padrão encontrado na posicão: %d", pos);
