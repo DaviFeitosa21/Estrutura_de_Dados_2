@@ -50,8 +50,8 @@ int busca_boyer(const char *texto, const char *padrao) {
 }
 
 int main() {
-    const char *texto = "este e um teste de busca boyer moore";
-    const char *padrao = "e";
+    const char *texto = "algoritmo de busca boyer moore";
+    const char *padrao = "moore";
 
     int pos = busca_boyer(texto, padrao);
 
