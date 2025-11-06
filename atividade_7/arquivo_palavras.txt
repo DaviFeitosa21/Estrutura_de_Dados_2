@@ -1,0 +1,1 @@
+algoritmo boyer teste algoritmo forca bruta teste
