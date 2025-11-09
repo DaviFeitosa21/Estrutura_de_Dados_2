@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
 #define TAM_ALFABETO 256
 
@@ -19,6 +20,7 @@ int busca_boyer(const char *texto, const char *padrao) {
     int n = strlen(texto);
     int m = strlen(padrao);
     int contador = 0;
+    int contador_comparacoes = 0;
     int tabela_pre_processamento[TAM_ALFABETO];
 
     pre_processamento(padrao, m, tabela_pre_processamento);
@@ -29,7 +31,12 @@ int busca_boyer(const char *texto, const char *padrao) {
         int j = m - 1;
 
         while(j >= 0 && padrao[j] == texto[deslocamento + j]) {
+            contador_comparacoes++;
             j--;
+        }
+
+        if(j >= 0) {
+            contador_comparacoes++;
         }
 
         if(j < 0) {
@@ -51,10 +58,14 @@ int busca_boyer(const char *texto, const char *padrao) {
         }
     }
 
+    printf("quantidade de comparações realizadas: %d\n", contador_comparacoes);
     return contador;
 }
 
 int main() {
+    clock_t inicio, fim;
+    double tempo_execucao;
+
     FILE *pont_arq;
 
     pont_arq = fopen("arquivo_palavras.txt", "r");
@@ -84,8 +95,11 @@ int main() {
 
     printf("Conteudo do arquivo:\n%s\n\n", texto);
 
-    const char *padrao = "teste";
+    const char *padrao = "a";
+
+    inicio = clock();
     int total = busca_boyer(texto, padrao);
+    fim = clock();
 
     if (total > 0) {
         printf("quantidade de padrões encontrados: %d\n", total);
@@ -93,6 +107,9 @@ int main() {
     else {
         printf("padrão não encontrado\n");
     }
+
+    tempo_execucao = ((double)(fim - inicio)) / CLOCKS_PER_SEC;
+    printf("tempo de execução: %.9f segundos\n", tempo_execucao);
 
     printf("\n\n");
     

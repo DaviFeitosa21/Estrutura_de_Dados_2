@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
 int busca_padrao(const char *texto, const char *padrao) {
     int n = strlen(texto);
@@ -23,6 +24,9 @@ int busca_padrao(const char *texto, const char *padrao) {
 }
 
 int main() {
+    clock_t inicio, fim;
+    double tempo_execucao;
+
     FILE *pont_arq;
 
     pont_arq = fopen("arquivo_palavras.txt", "r");
@@ -53,7 +57,10 @@ int main() {
     printf("Conteudo do arquivo:\n%s\n\n", texto);
 
     const char *padrao = "teste";
+
+    inicio = clock();
     int total = busca_padrao(texto, padrao);
+    fim = clock();
 
     if (total > 0) {
         printf("quantidade de padrões encontrados: %d\n", total);
@@ -61,6 +68,9 @@ int main() {
     else {
         printf("padrão não encontrado\n");
     }
+
+    tempo_execucao = ((double)(fim - inicio)) / CLOCKS_PER_SEC;
+    printf("tempo de execução: %.9f segundos\n", tempo_execucao);
 
     printf("\n\n");
     
