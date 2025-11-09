@@ -43,7 +43,7 @@ int busca_boyer(const char *texto, const char *padrao) {
             printf("padrão encontrado na posicão: %d\n", deslocamento);
             contador++;
 
-            //avança o deslocamento e continua a busca(evita loop)
+            //Avança o deslocamento e continua a busca(evita loop)
             deslocamento += (deslocamento + m < n) ? m - tabela_pre_processamento[(unsigned char)texto[deslocamento + m]] : 1;
         }
         else {
@@ -95,7 +95,7 @@ int main() {
 
     printf("Conteudo do arquivo:\n%s\n\n", texto);
 
-    const char *padrao = "a";
+    const char *padrao = "abacdacabc";
 
     inicio = clock();
     int total = busca_boyer(texto, padrao);

@@ -7,10 +7,12 @@ int busca_padrao(const char *texto, const char *padrao) {
     int n = strlen(texto);
     int m = strlen(padrao);
     int contador = 0;
+    int contador_comparacoes = 0;
 
     for (int i = 0; i <= n - m; i++) {
         int j;
         for (j = 0; j < m; j++) {
+            contador_comparacoes++;
             if(texto[j + i] != padrao[j]) {
                 break;
             }
@@ -20,6 +22,8 @@ int busca_padrao(const char *texto, const char *padrao) {
             contador++;
         }
     }
+
+    printf("quantidade de comparações realizadas: %d\n", contador_comparacoes);
     return contador;
 }
 
@@ -56,7 +60,7 @@ int main() {
 
     printf("Conteudo do arquivo:\n%s\n\n", texto);
 
-    const char *padrao = "teste";
+    const char *padrao = "abacdacabc";
 
     inicio = clock();
     int total = busca_padrao(texto, padrao);
